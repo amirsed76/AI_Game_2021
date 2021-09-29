@@ -98,3 +98,16 @@ class TeleportOnInvalidTile(Exception):
 
     def __str__(self):
         return self.message
+
+
+class CantMoveInWall(Exception):
+    def __init__(self,agent_id,tile_address):
+        self.tile_address = tile_address
+        self.agent_id = agent_id
+
+    @property
+    def message(self):
+        return f"agent {self.agent_id} can't move  in tile {self.tile_address} because it is wall "
+
+    def __str__(self):
+        return self.message

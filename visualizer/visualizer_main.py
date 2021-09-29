@@ -31,8 +31,12 @@ def get_game_log_json():
     return content
 
 
-def draw_wall(pygame):
-    pass
+def draw_wall(pygame, screen, x, y):
+    image = pygame.image.load("assets/wall.jpg")
+    image = pygame.transform.scale(image, (blockSize, blockSize))
+    X = PADDING + x * blockSize
+    Y = PADDING + y * blockSize
+    screen.blit(image, (X, Y))
 
 
 def draw_player(pygame, screen, x, y, character):
@@ -51,7 +55,7 @@ def draw_player(pygame, screen, x, y, character):
 def draw_teleport(pygame, screen, x, y):
     X = PADDING + x * blockSize + blockSize // 2
     Y = PADDING + y * blockSize + blockSize // 2
-    pygame.draw.circle(screen, TELEPORT_COLOR, (X, Y), (2 * blockSize) // 5)
+    pygame.draw.circle(screen, TELEPORT_COLOR, (X, Y), (6 * blockSize) // 13)
 
 
 def draw_gem(pygame, screen, x, y):
@@ -64,7 +68,7 @@ def draw_characters(pygame, screen, x, y, characters):
     if "A" in characters:
         draw_player(pygame, screen, x, y, "A")
     if "W" in characters:
-        draw_wall(pygame)
+        draw_wall(pygame,screen,x,y)
     if "1" in characters:
         pass
         # draw_gem(pygame)
@@ -77,7 +81,7 @@ if __name__ == '__main__':
     HEIGHT, WIDTH = height * blockSize, width * blockSize
     pygame.init()
 
-    screen = pygame.display.set_mode((WIDTH + 2*PADDING, HEIGHT + 2*PADDING))
+    screen = pygame.display.set_mode((WIDTH + 2 * PADDING, HEIGHT + 2 * PADDING))
     grid_rect = pygame.Rect(PADDING, PADDING, WIDTH, HEIGHT)
 
     i = 0

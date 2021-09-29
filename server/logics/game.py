@@ -110,6 +110,9 @@ class Game:
                     agent.hit_hurts.append(other_agent)
                 return
 
+        if target.is_wall():
+            raise
+
         agent.tile = target
         gem = target.get_gem()
         if gem is not None:
