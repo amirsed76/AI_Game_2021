@@ -116,7 +116,7 @@ class Game:
         agent.tile = target
         gem = target.get_gem()
         if gem is not None:
-            agent.add_gem(gem)
+            self.add_gem(agent=agent, gem=gem)
 
         return
 
