@@ -1,8 +1,6 @@
-import os
 import argparse
-import threading
 import json
-from server.logics.game import Game, Map, Agent
+from server.logics.game import  Game,Map,Agent
 from server.logics.network import Socket
 
 
@@ -30,6 +28,8 @@ def get_map(map_path):
 
 
 def main():
+    from pathlib import Path
+    Path("./game_logs").mkdir(parents=True, exist_ok=True)
     print("server is already run")
     config_path, map_path = parse_args()
 
