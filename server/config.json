@@ -1,0 +1,9 @@
+{
+  "server_ip": "127.0.0.1",
+  "server_port": 9921,
+  "player_count": 1,
+  "time_out": 1,
+  "init_score": 30,
+  "trap_count": 3,
+  "turn_count": 100
+}

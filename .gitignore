@@ -1,0 +1,6 @@
+.idea
+venv
+server/game_logs/*.json
+__init__.py
+__pycache__
+test.py
