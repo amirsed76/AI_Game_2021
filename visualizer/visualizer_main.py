@@ -21,6 +21,7 @@ BOARDER_COLOR = (0, 0, 0)
 BOX_COLOR = (100, 100, 100)
 TELEPORT_COLOR = (0, 0, 0)
 WINDOWS_PADDING = 20 * BLOCK_SIZE
+TIME_SLEEP = 0.5
 
 GEMS_PATH = [
     "assets/yellow_dimond.png",
@@ -140,6 +141,8 @@ def write_information(pygame, screen, start_address, agent_information, report):
 
 
 def show(json_content):
+    time_sleep = TIME_SLEEP
+    stop = False
     height, width = np.array(json_content[0]["map"]).shape
     HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
     pygame.init()
@@ -149,6 +152,8 @@ def show(json_content):
 
     i = 0
     while True:
+        if stop:
+            continue
         screen.fill(BACKGROUND_COLOR)
         screen.fill(color=TILE_COLOR, rect=grid_rect)
 
@@ -172,10 +177,23 @@ def show(json_content):
                 pygame.quit()
                 sys.exit()
 
+            # if event.type == pygame.K_e:
+            #     print("e")
+            #     if time_sleep < 2:
+            #         time_sleep = time_sleep + 0.1
+            #
+            # elif event.type == pygame.K_w:
+            #     if time_sleep > 0.11:
+            #         time_sleep = time_sleep - 0.1
+            # elif event.type == pygame.K_s:
+            #     stop = not stop
+
         pygame.display.update()
-        time.sleep(0.5)
+        time.sleep(time_sleep)
         if i < len(json_content) - 1:
             i += 1
+            print(time_sleep)
+            print(stop)
 
 
 if __name__ == '__main__':
