@@ -17,6 +17,7 @@ class Game:
         self.max_turn_count = turn_count
         self.turn_number = 0
         self.turn_logs = []
+        self.current_report = ""
 
     @staticmethod
     def create_game(config, player_connections: list, game_map: Map):
@@ -65,7 +66,7 @@ class Game:
         turn_action_request = agent.connection.read_data()
         action = Actions(turn_action_request)
         self.do_action(action=action, agent=agent)
-        print(f"accepted action : {action.value}")
+        self.current_report = f"accepted action : {action.value}"
 
     def add_gem(self, agent: Agent, gem):
         gem_constraints = game_rules.CONSTRAINTS
@@ -157,6 +158,7 @@ class Game:
         teleports = self.game_map.get_teleports()
         if not agent.tile.tile_type == Tile.TileType.TELEPORT:
             raise Exceptions.TeleportOnInvalidTile(agent_id=agent.id, tile_address=agent.tile.address)
+        teleports.remove(agent.tile)
 
         if len(teleports) > 0:
             target = random.choice(teleports)
@@ -208,7 +210,6 @@ class Game:
         elif action == Actions.NOOP:
             pass
 
-
         else:
             raise Exceptions.InValidAction(agent_id=agent.id)
 
@@ -221,7 +222,8 @@ class Game:
                 "agent_scores": [int(player.score) for player in self.agents],  # TODO agent scores
                 "finish": finish,
                 "winner_id": winner_id,
-                "map": self.get_show().tolist()
+                "map": self.get_show().tolist(),
+                "report": self.current_report
             }
 
         )
@@ -263,7 +265,9 @@ class Game:
                     agent.turn_age = turn_number
                     self.do_turn(agent=agent)
                 except Exception as e:
-                    print(e)
+                    self.current_report = str(e)
+
+                print(f"score: {agent.score}  report: {self.current_report}")
 
                 self.turn_log(agent_id=agent.id, finish=False, winner_id=None)
 
