@@ -213,17 +213,17 @@ class Game:
         else:
             raise Exceptions.InValidAction(agent_id=agent.id)
 
-    def turn_log(self, agent_id, finish=False, winner_id=None):
+    def turn_log(self, agent_id, finish=False, winner_id=None, report=""):
         self.turn_logs.append(
 
             {
                 "turn": self.turn_number,
                 "agent": agent_id,
-                "agent_scores": [int(player.score) for player in self.agents],  # TODO agent scores
+                "agents_info": [player.get_information() for player in self.agents],
                 "finish": finish,
                 "winner_id": winner_id,
                 "map": self.get_show().tolist(),
-                "report": self.current_report
+                "report": report
             }
 
         )
@@ -254,6 +254,7 @@ class Game:
             self.do_turn_init(agent=agent)
             agent.connection.set_time_out(self.time_out)
 
+        report = ""
         for turn_number in range(1, self.max_turn_count + 1):
             self.turn_number = turn_number
             print("_" * 20)
@@ -261,15 +262,16 @@ class Game:
 
             for agent in self.agents:
                 try:
-                    print(f"agent {agent.id} : ", end="")
                     agent.turn_age = turn_number
                     self.do_turn(agent=agent)
                 except Exception as e:
                     self.current_report = str(e)
+                gem1_count, gem2_count, gem3_count, gem4_count = agent.get_gems_count().values()
+                report = f"agent {agent.id} => score:{agent.score} gem1:{gem1_count} gem2:{gem2_count} gem3:{gem3_count} gem4:{gem4_count} trap_count:{agent.trap_count} report: {self.current_report}"
+                print(report)
 
-                print(f"score: {agent.score}  report: {self.current_report}")
-
-                self.turn_log(agent_id=agent.id, finish=False, winner_id=None)
+                self.turn_log(agent_id=agent.id, finish=False, winner_id=None,
+                              report=f"agent {agent.id} :{self.current_report}")
 
             if self.is_finish():
                 break
@@ -280,7 +282,7 @@ class Game:
             for agent in self.agents:
                 try:
                     agent.connection.write_utf(msg=f"finish! winner = agent {winner.id}")
-                    self.turn_log(agent_id=None, finish=True, winner_id=winner.id)
+                    self.turn_log(agent_id=None, finish=True, winner_id=winner.id, report=report)
                 except:
                     pass
         else:
@@ -290,7 +292,7 @@ class Game:
                     agent.connection.write_utf(msg=f"finish! Draw the game")
                 except:
                     pass
-            self.turn_log(agent_id=None, finish=True, winner_id=None)
+            self.turn_log(agent_id=None, finish=True, winner_id=None, report=report)
 
         now_time = datetime.now()
         with open(f"game_logs/{now_time.month}_{now_time.day}_{now_time.hour}_{now_time.minute}_{now_time.second}.json",

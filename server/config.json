@@ -4,7 +4,7 @@
   "server_port": 9921,
   "player_count": 1,
   "time_out": 1,
-  "init_score": 30,
+  "init_score": 45,
   "trap_count": 3,
   "turn_count": 100
 }

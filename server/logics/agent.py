@@ -63,3 +63,17 @@ class Agent:
             "gem3": self.gems.count(Tile.TileType.GEM3),
             "gem4": self.gems.count(Tile.TileType.GEM4),
         }
+
+    def get_information(self):
+        gem1, gem2, gem3, gem4 = self.get_gems_count().values()
+
+        return {
+            "score": self.score,
+            "trap_count": self.trap_count,
+            "hit_hurts_count": len(self.hit_hurts),
+            "trap_hurts_count": len(self.trap_hurts),
+            "gem1": gem1,
+            "gem2": gem2,
+            "gem3": gem3,
+            "gem4": gem4,
+        }
