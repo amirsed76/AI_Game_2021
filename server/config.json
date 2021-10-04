@@ -1,4 +1,5 @@
 {
+  "map": "map1.txt",
   "server_ip": "127.0.0.1",
   "server_port": 9921,
   "player_count": 1,

@@ -1,113 +1,80 @@
-class ExistTrap(Exception):
+import abc
+
+
+class GameException(Exception):
+    def __init__(self):
+        self._message = "Game Exception"
+
+    @property
+    def message(self):
+        return self._message
+
+    def __str__(self):
+        return self.message
+
+
+class ExistTrap(GameException):
     def __init__(self, agent_id, tile_address):
         self.tile_address = tile_address
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"exist a trap in tile = {self.tile_address} , when agent {self.agent_id} wanted put "
-
-    def __str__(self):
-        return self.message
+        self._message = f"exist a trap in tile = {self.tile_address} , when agent {self.agent_id} wanted put "
 
 
-class AgentNotHaveTrap(Exception):
+class AgentNotHaveTrap(GameException):
     def __init__(self, agent_id):
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"agent {self.agent_id} does not have trap"
-
-    def __str__(self):
-        return self.message
+        self._message = f"agent {self.agent_id} does not have trap"
 
 
-class CantPutTrapInTeleport(Exception):
+class CantPutTrapInTeleport(GameException):
     def __init__(self, agent_id):
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"can't put trap on teleport [agent = {self.agent_id}]"
-
-    def __str__(self):
-        return self.message
+        self._message = f"can't put trap on teleport [agent = {self.agent_id}]"
 
 
-class NotExistAvailableTeleport(Exception):
+class NotExistAvailableTeleport(GameException):
     def __init__(self, agent_id):
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"agent {self.agent_id} can't use teleport because not exist available teleport "
-
-    def __str__(self):
-        return self.message
+        self._message = f"agent {self.agent_id} can't use teleport because not exist available teleport "
 
 
-class NotAvailableMove(Exception):
+class NotAvailableMove(GameException):
     def __init__(self, agent_id, move: str, tile_address):
         self.agent_id = agent_id
         self.move = move
         self.tile_address = tile_address
-
-    @property
-    def message(self):
-        return f"can't go {self.move} in address = {self.tile_address} with agent {self.agent_id}"
-
-    def __str__(self):
-        return self.message
+        self._message = f"can't go {self.move} in address = {self.tile_address} with agent {self.agent_id}"
 
 
-class TrapConstraintFailed(Exception):
+class TrapConstraintFailed(GameException):
     def __init__(self, agent_id):
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"trap constraint failed for agent {self.agent_id}"
-
-    def __str__(self):
-        return self.message
+        self._message = f"trap constraint failed for agent {self.agent_id}"
 
 
-class InValidAction(Exception):
+class InValidAction(GameException):
     def __init__(self, agent_id):
         self.agent_id = agent_id
-
-    @property
-    def message(self):
-        return f"agent {self.agent_id} send invalid action or time out for sending it "
-
-    def __str__(self):
-        return self.message
+        self._message = f"agent {self.agent_id} send invalid action or time out for sending it "
 
 
-
-class TeleportOnInvalidTile(Exception):
+class TeleportOnInvalidTile(GameException):
     def __init__(self, agent_id, tile_address):
         self.tile_address = tile_address
         self.agent_id = agent_id
+        self._message = f"agent {self.agent_id} can't teleport in tile {self.tile_address} "
 
 
-    @property
-    def message(self):
-        return f"agent {self.agent_id} can't teleport in tile {self.tile_address} "
-
-    def __str__(self):
-        return self.message
-
-
-class CantMoveInWall(Exception):
-    def __init__(self,agent_id,tile_address):
+class CantMoveInWall(GameException):
+    def __init__(self, agent_id, tile_address):
         self.tile_address = tile_address
         self.agent_id = agent_id
+        self._message = f"agent {self.agent_id} can't move  in tile {self.tile_address} because it is wall "
 
-    @property
-    def message(self):
-        return f"agent {self.agent_id} can't move  in tile {self.tile_address} because it is wall "
 
-    def __str__(self):
-        return self.message
+class InValidMap(GameException):
+    def __init__(self, why_invalid: str):
+        self._message = f"Invalid map : {why_invalid}"
+
+
+
