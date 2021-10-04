@@ -70,13 +70,16 @@ def main():
     game_map = get_map(map_path=map_path)
     server = Socket.create(ip=server_ip, port=server_port)
     player_connections = []
+    if config["player_count"] not in range(1, 3):
+        raise Exceptions.InValidConfig(why_invalid="player count can only 1 or 2 ")
+
     for agent_id in range(config["player_count"]):
         try:
             conn = server.accept_client()
             player_connections.append(conn)
             print(f"one agent connected:{conn.addr}")
         except Exception as e:
-            print(bcolors.WARNING , e)
+            print(bcolors.WARNING, e)
 
     game = Game.create_game(config=config, player_connections=player_connections, game_map=game_map)
     game.run()

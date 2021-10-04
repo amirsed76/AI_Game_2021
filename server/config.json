@@ -6,5 +6,6 @@
   "time_out": 1,
   "init_score": 45,
   "trap_count": 3,
-  "turn_count": 100
+  "turn_count": 100,
+  "init_random_location": true
 }

@@ -21,9 +21,12 @@ class Game:
 
     @staticmethod
     def create_game(config, player_connections: list, game_map: Map):
-        addresses = random.sample(
-            [(0, game_map.width - 1), (game_map.height - 1, game_map.width - 1), (game_map.height - 1, 0), (0, 0)],
-            len(player_connections))
+        addresses = [(0, 0), (game_map.height - 1, game_map.width - 1), (0, game_map.width - 1),
+                     (game_map.height - 1, 0)]
+
+        if config["init_random_location"]:
+            random.shuffle(addresses)
+
         agents = []
         for i, conn in enumerate(player_connections):
             y, x = addresses[i]
@@ -238,8 +241,9 @@ class Game:
     def get_winner(self):
         # TODO for two players
         agents = sorted(self.agents, key=lambda agent: -agent.score)
+
         if len(agents) == 1:
-            return [agents[0]]
+            return None
         else:
             agent1, agent2 = agents[0], agents[1]
             if agent1.score < agent2.score:
@@ -277,12 +281,24 @@ class Game:
                 break
 
         winners = self.get_winner()
-        if len(winners) == 1:
+
+        if winners is None:
+            winner = None
+            for agent in self.agents:
+                try:
+                    agent.connection.write_utf(msg=f"finish!")
+                    self.turn_log(agent_id=None, finish=True, winner_id=None,
+                                  report=f"finish!")
+                except:
+                    pass
+
+        elif len(winners) == 1:
             winner = winners[0]
             for agent in self.agents:
                 try:
                     agent.connection.write_utf(msg=f"finish! winner = agent {winner.id}")
-                    self.turn_log(agent_id=None, finish=True, winner_id=winner.id, report=report)
+                    self.turn_log(agent_id=None, finish=True, winner_id=winner.id,
+                                  report=f"finish! winner = agent {winner.id}")
                 except:
                     pass
         else:
@@ -292,7 +308,7 @@ class Game:
                     agent.connection.write_utf(msg=f"finish! Draw the game")
                 except:
                     pass
-            self.turn_log(agent_id=None, finish=True, winner_id=None, report=report)
+            self.turn_log(agent_id=None, finish=True, winner_id=None, report=f"finish! The game ended in a draw")
 
         now_time = datetime.now()
         with open(f"game_logs/{now_time.month}_{now_time.day}_{now_time.hour}_{now_time.minute}_{now_time.second}.json",

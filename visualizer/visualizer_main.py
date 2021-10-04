@@ -22,7 +22,6 @@ BOX_COLOR = (100, 100, 100)
 TELEPORT_COLOR = (0, 0, 0)
 WINDOWS_PADDING = 20 * BLOCK_SIZE
 
-
 GEMS_PATH = [
     "assets/yellow_dimond.png",
     "assets/green_dimond.png",
@@ -107,6 +106,39 @@ def draw_characters(pygame, screen, x, y, characters):
         draw_gem(pygame, screen, x, y, 3)
 
 
+def write_information(pygame, screen, start_address, agent_information, report):
+    X, Y = start_address
+    #  a={
+    #     "score": self.score,
+    #     "trap_count": self.trap_count,
+    #     "hit_hurts_count": len(self.hit_hurts),
+    #     "trap_hurts_count": len(self.trap_hurts),
+    #     "gem1": gem1,
+    #     "gem2": gem2,
+    #     "gem3": gem3,
+    #     "gem4": gem4,
+    # }
+    font = pygame.font.Font('freesansbold.ttf', BLOCK_SIZE // 3)
+
+    Text = f" {report}"
+    text = font.render(Text, True, (0, 0, 0))
+    textRect = text.get_rect()
+    textRect.centery = PADDING - BLOCK_SIZE
+    textRect.x = X
+    screen.blit(text, textRect)
+
+    for index, info in enumerate(agent_information):
+        Text = f"agent {index + 1} : score = {info['score']}  traps={info['trap_count']}  hits={info['hit_hurts_count']}  trap hurts={info['trap_hurts_count']}" \
+               f" gems= {[info['gem1'], info['gem2'], info['gem3'], info['gem4']]}"
+
+        text = font.render(Text, True, (0, 0, 0))
+        textRect = text.get_rect()
+        textRect.centery = Y + index * BLOCK_SIZE
+        textRect.x = X
+
+        screen.blit(text, textRect)
+
+
 def show(json_content):
     height, width = np.array(json_content[0]["map"]).shape
     HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
@@ -131,6 +163,9 @@ def show(json_content):
                 rect = pygame.Rect(X, Y, BLOCK_SIZE, BLOCK_SIZE)
                 pygame.draw.rect(screen, BOARDER_COLOR, rect, 1)
                 draw_characters(pygame, screen, x, y, tile)
+
+        write_information(pygame, screen, (PADDING, HEIGHT + PADDING + BLOCK_SIZE), json_content[i]["agents_info"],
+                          json_content[i]["report"])
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

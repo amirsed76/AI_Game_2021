@@ -77,4 +77,6 @@ class InValidMap(GameException):
         self._message = f"Invalid map : {why_invalid}"
 
 
-
+class InValidConfig(GameException):
+    def __init__(self, why_invalid: str):
+        self._message = f"Invalid Config : {why_invalid}"
