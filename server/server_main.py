@@ -1,5 +1,7 @@
 import argparse
 import json
+import os
+
 from server.logics.game import Game, Map
 from server.logics.network import Socket
 from server.logics import Exceptions
@@ -52,14 +54,15 @@ def get_map(map_path):
             if character not in ["E", "W", "1", "2", "3", "4", "T"]:
                 raise Exceptions.InValidMap(why_invalid=f"{character} is not valid map character")
 
-    if height > 30 or width > 30:
-        raise Exceptions.InValidMap(why_invalid=f"width and height can't bigger than 30 ")
+    if height > 20 or width > 20:
+        raise Exceptions.InValidMap(why_invalid=f"width and height can't bigger than 20 ")
 
     return Map(map_content=rows)
 
 
 def main():
     Path("./game_logs").mkdir(parents=True, exist_ok=True)
+
     print("server is already run")
     config_path = parse_args()
 

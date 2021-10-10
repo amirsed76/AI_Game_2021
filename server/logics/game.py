@@ -18,6 +18,7 @@ class Game:
         self.turn_number = 0
         self.turn_logs = []
         self.current_report = ""
+        self.outs_file = open("outs.txt", "w")
 
     @staticmethod
     def create_game(config, player_connections: list, game_map: Map):
@@ -231,6 +232,16 @@ class Game:
 
         )
 
+    def log_map(self):
+        lines = [f"TURN {self.turn_number} \n"]
+        for row in self.get_show().tolist():
+            row_str = ""
+            for item in row:
+                row_str += str(item).ljust(4)
+            lines.append(row_str + "\n")
+        lines.append("-" * 10 + "\n")
+        self.outs_file.writelines(lines)
+
     def is_finish(self):
         for agent in self.agents:
             if agent.score <= game_rules.GAME_OVER_SCORE:
@@ -263,8 +274,13 @@ class Game:
             self.turn_number = turn_number
             print("_" * 20)
             print(f"turn : {turn_number} \n ")
+            if turn_number == 1:
+                self.turn_log(agent_id=None, finish=False, winner_id=None,
+                              report=f"")
 
             for agent in self.agents:
+                self.log_map()
+
                 try:
                     agent.turn_age = turn_number
                     self.do_turn(agent=agent)

@@ -14,8 +14,8 @@ import io
 # from svg import Parser, Rasterizer
 
 TILE_COLOR = (131, 137, 141)
-BLOCK_SIZE = 50
-PADDING = 5 * BLOCK_SIZE
+BLOCK_SIZE = 35
+PADDING = 3 * BLOCK_SIZE
 BACKGROUND_COLOR = (123, 149, 128)
 BOARDER_COLOR = (0, 0, 0)
 BOX_COLOR = (100, 100, 100)
@@ -176,24 +176,25 @@ def show(json_content):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_e:
+                    if time_sleep >= 0.2:
+                        time_sleep -= 0.1
 
-            # if event.type == pygame.K_e:
-            #     print("e")
-            #     if time_sleep < 2:
-            #         time_sleep = time_sleep + 0.1
-            #
-            # elif event.type == pygame.K_w:
-            #     if time_sleep > 0.11:
-            #         time_sleep = time_sleep - 0.1
-            # elif event.type == pygame.K_s:
-            #     stop = not stop
+                if event.key == pygame.K_w:
+                    if time_sleep <= 2:
+                        time_sleep += 0.1
+
+            if event.type == pygame.K_e:
+                if time_sleep < 2:
+                    time_sleep = time_sleep + 0.1
+
 
         pygame.display.update()
         time.sleep(time_sleep)
         if i < len(json_content) - 1:
             i += 1
-            print(time_sleep)
-            print(stop)
+
 
 
 if __name__ == '__main__':
