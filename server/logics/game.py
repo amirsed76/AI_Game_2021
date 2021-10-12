@@ -115,7 +115,7 @@ class Game:
                 return
 
         if target.is_wall():
-            raise  # TODO
+            raise  Exceptions.CantMoveInWall(agent_id=agent.id,tile_address=target.address)
 
         agent.tile = target
         gem = target.get_gem()

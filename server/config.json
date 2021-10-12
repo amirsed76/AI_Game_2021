@@ -2,7 +2,7 @@
   "map": "map1_11.txt",
   "server_ip": "127.0.0.1",
   "server_port": 9921,
-  "player_count": 1,
+  "player_count": 2,
   "time_out": 1,
   "init_score": 45,
   "trap_count": 3,

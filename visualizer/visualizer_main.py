@@ -12,6 +12,7 @@ from svglib.svglib import svg2rlg
 import io
 
 # from svg import Parser, Rasterizer
+WINDOWS_SIZE = 1300
 
 TILE_COLOR = (131, 137, 141)
 BLOCK_SIZE = 50
@@ -84,14 +85,17 @@ def draw_gem(pygame, screen, x, y, gem_index):
     screen.blit(image, (X, Y))
 
 
+def draw_trap(pygame, screen, x, y, COLORE):
+    X = x * BLOCK_SIZE + PADDING
+    Y = y * BLOCK_SIZE + PADDING
+    center = (X + BLOCK_SIZE + BLOCK_SIZE // 2, Y + BLOCK_SIZE + BLOCK_SIZE // 2)
+    rect = pygame.Rect(X, Y, BLOCK_SIZE, BLOCK_SIZE)
+    pygame.draw.rect(screen, COLORE, rect, 1)
+
+
 def draw_characters(pygame, screen, x, y, characters):
     if "T" in characters:
         draw_teleport(pygame, screen, x, y)
-    if "A" in characters:
-        draw_player(pygame, screen, x, y, 0)
-
-    if "B" in characters:
-        draw_player(pygame, screen, x, y, 1)
 
     if "W" in characters:
         draw_wall(pygame, screen, x, y)
@@ -105,6 +109,18 @@ def draw_characters(pygame, screen, x, y, characters):
 
     if "4" in characters:
         draw_gem(pygame, screen, x, y, 3)
+
+    if "a" in characters:
+        draw_trap(pygame, screen, x, y, (46, 229, 46))
+
+    if "b" in characters:
+        draw_trap(pygame, screen, x, y, (255, 51, 255))
+
+    if "A" in characters:
+        draw_player(pygame, screen, x, y, 0)
+
+    if "B" in characters:
+        draw_player(pygame, screen, x, y, 1)
 
 
 def write_information(pygame, screen, start_address, agent_information, report):
@@ -131,19 +147,27 @@ def write_information(pygame, screen, start_address, agent_information, report):
 
 
 def show(json_content):
+    global BLOCK_SIZE
+    global PADDING
+
     time_sleep = TIME_SLEEP
     pause = False
     stop = False
     height, width = np.array(json_content[0]["map"]).shape
-    HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
-    pygame.init()
+    BLOCK_SIZE = WINDOWS_SIZE // (max(height, width) + 20)
+    PADDING = 3 * BLOCK_SIZE
 
+    HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
+    WIDTH = max(11 * BLOCK_SIZE, WIDTH)
+
+    pygame.init()
     screen = pygame.display.set_mode((WIDTH + 2 * PADDING, HEIGHT + 2 * PADDING))
     grid_rect = pygame.Rect(PADDING, PADDING, WIDTH, HEIGHT)
 
     i = 0
     while True:
         if stop:
+            time.sleep(time_sleep)
             continue
         screen.fill(BACKGROUND_COLOR)
         screen.fill(color=TILE_COLOR, rect=grid_rect)
@@ -175,7 +199,6 @@ def show(json_content):
                 if event.key == pygame.K_w:
                     if time_sleep <= 2:
                         time_sleep += 0.1
-
 
                 if event.key == pygame.K_s:
                     pause = not pause
