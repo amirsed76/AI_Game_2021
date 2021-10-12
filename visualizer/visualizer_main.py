@@ -14,7 +14,7 @@ import io
 # from svg import Parser, Rasterizer
 
 TILE_COLOR = (131, 137, 141)
-BLOCK_SIZE = 35
+BLOCK_SIZE = 50
 PADDING = 3 * BLOCK_SIZE
 BACKGROUND_COLOR = (123, 149, 128)
 BOARDER_COLOR = (0, 0, 0)
@@ -109,16 +109,6 @@ def draw_characters(pygame, screen, x, y, characters):
 
 def write_information(pygame, screen, start_address, agent_information, report):
     X, Y = start_address
-    #  a={
-    #     "score": self.score,
-    #     "trap_count": self.trap_count,
-    #     "hit_hurts_count": len(self.hit_hurts),
-    #     "trap_hurts_count": len(self.trap_hurts),
-    #     "gem1": gem1,
-    #     "gem2": gem2,
-    #     "gem3": gem3,
-    #     "gem4": gem4,
-    # }
     font = pygame.font.Font('freesansbold.ttf', BLOCK_SIZE // 3)
 
     Text = f" {report}"
@@ -142,6 +132,7 @@ def write_information(pygame, screen, start_address, agent_information, report):
 
 def show(json_content):
     time_sleep = TIME_SLEEP
+    pause = False
     stop = False
     height, width = np.array(json_content[0]["map"]).shape
     HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
@@ -185,16 +176,17 @@ def show(json_content):
                     if time_sleep <= 2:
                         time_sleep += 0.1
 
-            if event.type == pygame.K_e:
-                if time_sleep < 2:
-                    time_sleep = time_sleep + 0.1
 
+                if event.key == pygame.K_s:
+                    pause = not pause
+
+        if pause:
+            continue
 
         pygame.display.update()
         time.sleep(time_sleep)
         if i < len(json_content) - 1:
             i += 1
-
 
 
 if __name__ == '__main__':

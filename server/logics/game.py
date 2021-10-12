@@ -70,7 +70,6 @@ class Game:
         turn_action_request = agent.connection.read_data()
         action = Actions(turn_action_request)
         self.do_action(action=action, agent=agent)
-        self.current_report = f"accepted action : {action.value}"
 
     def add_gem(self, agent: Agent, gem):
         gem_constraints = game_rules.CONSTRAINTS
@@ -109,17 +108,18 @@ class Game:
             if other_agent == agent:
                 continue
             if other_agent.tile == target:
-                if agent.score >= other_agent:
+                if agent.score >= other_agent.score:
                     other_agent.hit_hurts.append(agent)
                 else:
                     agent.hit_hurts.append(other_agent)
                 return
 
         if target.is_wall():
-            raise
+            raise  # TODO
 
         agent.tile = target
         gem = target.get_gem()
+
         if gem is not None:
             self.add_gem(agent=agent, gem=gem)
 
@@ -159,7 +159,7 @@ class Game:
         self.do_move_action(agent=agent, target=target)
 
     def do_teleport(self, agent: Agent):
-        teleports = self.game_map.get_teleports()
+        teleports = self.game_map.get_teleports().copy()
         if not agent.tile.tile_type == Tile.TileType.TELEPORT:
             raise Exceptions.TeleportOnInvalidTile(agent_id=agent.id, tile_address=agent.tile.address)
         teleports.remove(agent.tile)
@@ -192,30 +192,41 @@ class Game:
             raise Exceptions.TrapConstraintFailed(agent_id=agent.id)
 
     def do_action(self, action, agent):
+        try:
 
-        if action == Actions.UP:
-            self.do_up_action(agent=agent)
+            if action == Actions.UP:
+                self.do_up_action(agent=agent)
 
-        elif action == Actions.DOWN:
-            self.do_down_action(agent=agent)
+            elif action == Actions.DOWN:
+                self.do_down_action(agent=agent)
 
-        elif action == Actions.RIGHT:
-            self.do_right_action(agent=agent)
+            elif action == Actions.RIGHT:
+                self.do_right_action(agent=agent)
 
-        elif action == Actions.LEFT:
-            self.do_left_action(agent=agent)
+            elif action == Actions.LEFT:
+                self.do_left_action(agent=agent)
 
-        elif action == Actions.TELEPORT:
-            self.do_teleport(agent=agent)
+            elif action == Actions.TELEPORT:
+                self.do_teleport(agent=agent)
 
-        elif action == Actions.TRAP:
-            self.do_put_trap(agent=agent)
+            elif action == Actions.TRAP:
+                self.do_put_trap(agent=agent)
 
-        elif action == Actions.NOOP:
-            pass
+            elif action == Actions.NOOP:
+                pass
 
-        else:
-            raise Exceptions.InValidAction(agent_id=agent.id)
+            else:
+                raise Exceptions.InValidAction(agent_id=agent.id)
+
+            self.current_report = f"accepted action : {action.value}"
+        except Exception as e:
+            self.current_report = f"{e}"
+        finally:
+            for player in self.agents:
+                if player == agent:
+                    continue
+                if agent.tile in player.trap_tiles:
+                    agent.trap_hurts.append(player)
 
     def turn_log(self, agent_id, finish=False, winner_id=None, report=""):
         self.turn_logs.append(
@@ -242,11 +253,10 @@ class Game:
         lines.append("-" * 10 + "\n")
         self.outs_file.writelines(lines)
 
-    def is_finish(self):
-        for agent in self.agents:
-            if agent.score <= game_rules.GAME_OVER_SCORE:
-                return True
-
+    def is_game_over_finish(self):
+        # for agent in self.agents:
+        #     if agent.score <= game_rules.GAME_OVER_SCORE:
+        #         return True
         return False
 
     def get_winner(self):
@@ -280,12 +290,9 @@ class Game:
 
             for agent in self.agents:
                 self.log_map()
+                agent.turn_age = turn_number
+                self.do_turn(agent=agent)
 
-                try:
-                    agent.turn_age = turn_number
-                    self.do_turn(agent=agent)
-                except Exception as e:
-                    self.current_report = str(e)
                 gem1_count, gem2_count, gem3_count, gem4_count = agent.get_gems_count().values()
                 report = f"agent {agent.id} => score:{agent.score} gem1:{gem1_count} gem2:{gem2_count} gem3:{gem3_count} gem4:{gem4_count} trap_count:{agent.trap_count} report: {self.current_report}"
                 print(report)
@@ -293,7 +300,7 @@ class Game:
                 self.turn_log(agent_id=agent.id, finish=False, winner_id=None,
                               report=f"agent {agent.id} :{self.current_report}")
 
-            if self.is_finish():
+            if self.is_game_over_finish():
                 break
 
         winners = self.get_winner()

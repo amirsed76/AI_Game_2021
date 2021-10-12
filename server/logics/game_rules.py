@@ -14,7 +14,7 @@ CONSTRAINTS = {
 }
 
 TRAP_CONSTRAINT_SCORE = [5 * i for i in range(1, 21)]  # max traps == 10
-GAME_OVER_SCORE = -1
+# GAME_OVER_SCORE = -1
 
 HIT_HURT = -5
 TRAP_HURT = -10
