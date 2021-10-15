@@ -1,10 +1,8 @@
 import argparse
 import json
-import os
-
-from server.logics.game import Game, Map
-from server.logics.network import Socket
-from server.logics import Exceptions
+from logics.game import Game, Map
+from logics.network import Socket
+from logics import Exceptions
 from pathlib import Path
 
 

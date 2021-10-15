@@ -1,6 +1,6 @@
-from server.logics.network import Socket
-from server.logics.map import Tile
-from server.logics import game_rules
+from logics.network import Socket
+from logics.map import Tile
+from logics import game_rules
 
 PLAYER_CHARACTERS = ["A", "B", "C", "D"]
 Trap_CHARACTERS = ["a", "b", "c", "d"]

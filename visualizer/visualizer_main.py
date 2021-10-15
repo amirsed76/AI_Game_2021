@@ -1,6 +1,4 @@
-import base64
 import sys
-import io
 
 import pygame
 import json
@@ -8,10 +6,8 @@ import time
 import tkinter as tk
 from tkinter import filedialog
 import numpy as np
-from svglib.svglib import svg2rlg
-import io
 
-# from svg import Parser, Rasterizer
+
 WINDOWS_SIZE = 1300
 
 TILE_COLOR = (131, 137, 141)

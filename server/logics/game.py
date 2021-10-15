@@ -1,11 +1,11 @@
 import json
 
-from server.logics.map import Map, Tile
-from server.logics.agent import Agent
-from server.logics.actions import Actions
+from logics.map import Map, Tile
+from logics.agent import Agent
+from logics.actions import Actions
 import random
 import numpy as np
-from server.logics import Exceptions, game_rules
+from logics import Exceptions, game_rules
 from datetime import datetime
 
 

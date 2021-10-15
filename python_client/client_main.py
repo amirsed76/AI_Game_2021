@@ -1,6 +1,5 @@
 import random
-from python_client.base import BaseAgent, Action
-import time
+from base import BaseAgent, Action
 
 
 class Agent(BaseAgent):
