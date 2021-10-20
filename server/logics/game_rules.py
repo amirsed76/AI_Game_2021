@@ -4,7 +4,7 @@ CONSTRAINTS = {
     "min_score_for_get_gem_1": -100000,
     "min_score_for_get_gem_2": 15,
     "min_score_for_get_gem_3": 50,
-    "min_score_for_get_gem_4": 120,
+    "min_score_for_get_gem_4": 140,
 
     "max_eating_gem_1": 15,
     "max_eating_gem_2": 8,
