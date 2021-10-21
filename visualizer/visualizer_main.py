@@ -7,11 +7,10 @@ import tkinter as tk
 from tkinter import filedialog
 import numpy as np
 
-
 WINDOWS_SIZE = 1300
 
 TILE_COLOR = (131, 137, 141)
-BLOCK_SIZE = 50
+BLOCK_SIZE = 30
 PADDING = 3 * BLOCK_SIZE
 BACKGROUND_COLOR = (123, 149, 128)
 BOARDER_COLOR = (0, 0, 0)
@@ -199,6 +198,32 @@ def show(json_content):
                 if event.key == pygame.K_s:
                     pause = not pause
 
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+
+                if event.key == pygame.K_b:
+                    if BLOCK_SIZE < 100:
+                        BLOCK_SIZE += 5
+                        PADDING = 3 * BLOCK_SIZE
+
+                        HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
+                        WIDTH = max(11 * BLOCK_SIZE, WIDTH)
+
+                        pygame.init()
+                        screen = pygame.display.set_mode((WIDTH + 2 * PADDING, HEIGHT + 2 * PADDING))
+                        grid_rect = pygame.Rect(PADDING, PADDING, WIDTH, HEIGHT)
+
+                if event.key == pygame.K_n:
+                    if 10 < BLOCK_SIZE:
+                        BLOCK_SIZE -= 5
+                        PADDING = 3 * BLOCK_SIZE
+                        HEIGHT, WIDTH = height * BLOCK_SIZE, width * BLOCK_SIZE
+                        WIDTH = max(11 * BLOCK_SIZE, WIDTH)
+
+                        pygame.init()
+                        screen = pygame.display.set_mode((WIDTH + 2 * PADDING, HEIGHT + 2 * PADDING))
+                        grid_rect = pygame.Rect(PADDING, PADDING, WIDTH, HEIGHT)
         if pause:
             continue
 

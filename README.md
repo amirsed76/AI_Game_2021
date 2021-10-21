@@ -58,6 +58,12 @@ w => make game slower
 
 s => stop game
 
+q=> quit game
+
+b=> make display bigger
+
+n=> make display smaller
+
 # python client 
 you can use python client 
 
