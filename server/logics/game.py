@@ -7,7 +7,7 @@ import random
 import numpy as np
 from logics import Exceptions, game_rules
 from datetime import datetime
-
+from logics.utils import bcolors
 
 class Game:
     def __init__(self, time_out: int, agents: list, game_map: Map, turn_count):
@@ -66,9 +66,13 @@ class Game:
         agent.connection.write_utf(msg=content)
 
     def do_turn(self, agent: Agent):
-        self.send_turn_info(agent)
-        turn_action_request = agent.connection.read_data()
-        action = Actions(turn_action_request)
+        try:
+            self.send_turn_info(agent)
+            turn_action_request = agent.connection.read_data()
+            action = Actions(turn_action_request)
+        except Exception as e :
+            print(bcolors.WARNING + f"not valid action " + bcolors.reset)
+            action = Actions.NOOP
         self.do_action(action=action, agent=agent)
 
     def add_gem(self, agent: Agent, gem):

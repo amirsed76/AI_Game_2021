@@ -29,10 +29,10 @@ class Socket:
 
     def write_utf(self, msg: str):
         # self._connection.send(struct.pack('>H', len(str(msg))))
-        self._connection.send(str(msg).encode('utf-8'))
+        self._connection.send(str(msg+"\n").encode('utf-8'))
 
     def read_data(self):
         try:
-            return self.read_utf()
+            return self.read_utf().strip()
         except Exception as e:
             return None

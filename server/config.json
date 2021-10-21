@@ -1,6 +1,6 @@
 {
   "map": "map1_10.txt",
-  "server_ip": "127.0.0.1",
+  "server_ip": "192.168.43.123",
   "server_port": 9921,
   "player_count": 1,
   "time_out": 1,
