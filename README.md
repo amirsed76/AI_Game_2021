@@ -64,6 +64,8 @@ b=> make display bigger
 
 n=> make display smaller
 
+r=> reset game show 
+
 # python client 
 you can use python client 
 

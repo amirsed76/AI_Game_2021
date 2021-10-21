@@ -201,7 +201,10 @@ def show(json_content):
                 if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
-
+                    
+                if event.key == pygame.K_r:
+                    i=0
+                    
                 if event.key == pygame.K_b:
                     if BLOCK_SIZE < 100:
                         BLOCK_SIZE += 5
