@@ -4,18 +4,7 @@ from logics.game import Game, Map
 from logics.network import Socket
 from logics import Exceptions
 from pathlib import Path
-
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+from logics.utils import bcolors
 
 
 def parse_args():
@@ -80,7 +69,7 @@ def main():
             player_connections.append(conn)
             print(f"one agent connected:{conn.addr}")
         except Exception as e:
-            print(bcolors.WARNING, e)
+            print(bcolors.WARNING, e, bcolors.reset)
 
     game = Game.create_game(config=config, player_connections=player_connections, game_map=game_map)
     game.run()
@@ -90,4 +79,4 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as e:
-        print(bcolors.FAIL, e)
+        print(bcolors.FAIL, e, bcolors.reset)

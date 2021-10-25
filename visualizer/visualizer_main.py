@@ -10,7 +10,7 @@ import numpy as np
 WINDOWS_SIZE = 1300
 
 TILE_COLOR = (131, 137, 141)
-BLOCK_SIZE = 30
+BLOCK_SIZE = 40
 PADDING = 3 * BLOCK_SIZE
 BACKGROUND_COLOR = (123, 149, 128)
 BOARDER_COLOR = (0, 0, 0)
@@ -201,7 +201,10 @@ def show(json_content):
                 if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
-
+                    
+                if event.key == pygame.K_r:
+                    i=0
+                    
                 if event.key == pygame.K_b:
                     if BLOCK_SIZE < 100:
                         BLOCK_SIZE += 5
