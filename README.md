@@ -1,75 +1,73 @@
-# install python and pip 
-install python version 3.6 or upper 
-for download : <a>https://www.python.org/downloads/ 
+# Installing prerequisites (Python, Pip and Packages) 
+1- Install <a href=https://www.python.org/downloads/>Python</a> version 3.6 or upper 
 
-create and activate virtual environment:
+2- Create and activate virtual environment according to your operating system. <a href=https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3>Unix</a> and <a href=https://mothergeo-py.readthedocs.io/en/latest/development/how-to/venv-win.html>Windows</a>
 
-for unix: <a>https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3
+3- Active or install Tkinter:
+ <a href=https://docs.python.org/3/library/tkinter.html>this</a> or <a href=https://www.javatpoint.com/how-to-install-tkinter-in-python>this</a> or <a href= https://riptutorial.com/tkinter/example/3206/installation-or-setup>this</a>
 
-for windows : <a>https://mothergeo-py.readthedocs.io/en/latest/development/how-to/venv-win.html
+4- Install packages by the following command
+```
+    pip install -r requirement.txt
+```
 
-active or install tkinter : <a>https://docs.python.org/3/library/tkinter.html or  <a>https://www.javatpoint.com/how-to-install-tkinter-in-python or <a> https://riptutorial.com/tkinter/example/3206/installation-or-setup
+# Runing server
 
+1- Open CMD or terminal
 
+2- Activate virtual environment mentioned before
 
-# installation packages
-`pip install -r requirement.txt`
+3- Go to server directory by the following command
+```
+    cd server
+```
+4- Run server (engine)
+```
+    python server_main.py
+```
 
-# server
-## server configuration 
-you can change game configuration with change content of config.json in server directory 
-
-## run server 
-open cmd or terminal 
-
-activate virtual environment that said before
-
-go to server directory 
-
-`cd server`
-
-run server (engine)
-
-`python server_main.py`
-
-when all player join server, game starts and creates a json file in game_logs directory and you can use it for visualizing
+- After all players joined the server, the game started.
+- When the game finish, a JSON file is created in the `'game_logs'` directory, and you can use it for visualizing.
+- You can change the configuration of the game by changing `'config.json'` in the server directory.
 
 
-# visualizer 
-for use visualizer you should install tkinter 
-## run visualizer 
-open cmd or terminal 
+# Runing visualizer 
+- For use visualizer, you should install Tkinter 
 
-activate virtual environment that said before
+1- open CMD or terminal
 
-go to visualizer directory 
+2- Activate the virtual environment mentioned before
 
-`cd visualizer`
+3- Go to server visualizer by the following command
+```
+    cd visualizer
+```
+4- Run visualizer
+```
+    python visualizer_main.py
+```
+5- Select created JSON file from `'game_logs'` directory to visualize the game
 
-run visualizer
-`python visualizer_main.py`
 
-select game json log  and see game 
 
-## buttons 
-e => make game faster 
+## Visualizer keys 
+- **E:** Increase game speed 
 
-w => make game slower
+- **W:** Decrease game speed
 
-s => stop game
+- **S:** Stopping the game
 
-q=> quit game
+- **Q:** Quit from game
 
-b=> make display bigger
+- **B:** Increase display size
 
-n=> make display smaller
+- **N:** Decrease display size
 
-# python client 
-you can use python client 
+- **R:** Reset game showing
 
-for write AI code in python client,you must write code in do turn function in client_main.py and run it
+# Client 
 
-##client configuration 
-you can change ip and port of server in client_config.json
+- You can use `'client_main.py'` to develop your AI code. Your code should be placed on the `'do_turn'` function.
+- You can change IP and Port of server in `'client_config.json'` 
 
 
