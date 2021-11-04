@@ -102,7 +102,7 @@ class Game:
             constraint_max_gem_eating = gem_constraints["max_eating_gem_4"]
             agent_gem_count = agent_gems_count["gem4"]
 
-        if agent.score >= constraint_score and agent_gem_count <= constraint_max_gem_eating:
+        if agent.score >= constraint_score and agent_gem_count < constraint_max_gem_eating:
             agent.add_gem(gem)
             agent.tile.tile_type = Tile.TileType.EMPTY
 
