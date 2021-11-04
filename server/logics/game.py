@@ -62,7 +62,7 @@ class Game:
 
     def send_turn_info(self, agent):
         map_chars = self.get_show(for_player=agent).reshape(self.game_map.height * self.game_map.width, ).tolist()
-        content = f"{self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])} {' '.join(map_chars)}"
+        content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])} {' '.join(map_chars)}"
         agent.connection.write_utf(msg=content)
 
     def do_turn(self, agent: Agent):

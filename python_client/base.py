@@ -7,7 +7,7 @@ import numpy as np
 
 def read_utf(connection: socket.socket):
     # length = struct.unpack('>H', connection.recv(2))[0]
-    return connection.recv(2048).decode('utf-8')
+    return connection.recv(2048).decode('utf-8').strip()
 
 
 def write_utf(connection: socket.socket, msg: str):
@@ -61,6 +61,8 @@ class BaseAgent(metaclass=abc.ABCMeta):
 
     def _read_turn_data(self, data: str):
         info = data.strip().split(" ")
+        info = info[-(2 + self.agent_count + (self.grid_width * self.grid_height)):]
+
         self.turn_count = int(info[0])
         self.trap_count = int(info[1])
         self.agent_scores = [int(score) for score in info[2:2 + self.agent_count]]

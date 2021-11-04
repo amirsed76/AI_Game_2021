@@ -24,7 +24,7 @@ class Socket:
 
     def read_utf(self):
         # length = struct.unpack('>H', self._connection.recv(2))[0]
-        data = self._connection.recv(2048).decode('utf-8')
+        data = self._connection.recv(2048).decode('utf-8').strip()
         return data
 
     def write_utf(self, msg: str):
