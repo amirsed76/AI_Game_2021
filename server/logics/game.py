@@ -9,6 +9,7 @@ from logics import Exceptions, game_rules
 from datetime import datetime
 from logics.utils import bcolors
 
+
 class Game:
     def __init__(self, time_out: int, agents: list, game_map: Map, turn_count):
         self.time_out = time_out
@@ -61,8 +62,11 @@ class Game:
             raise Exception(f"agent with id={agent.id} not send confirm")
 
     def send_turn_info(self, agent):
+        print(' '.join([' '.join([str(item) for item in player.get_gems_count().values()]) for player in self.agents]))
         map_chars = self.get_show(for_player=agent).reshape(self.game_map.height * self.game_map.width, ).tolist()
-        content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])} {' '.join(map_chars)}"
+        content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])}" \
+                  f" {' '.join([' '.join([str(item) for item in player.get_gems_count().values()]) for player in self.agents])}" \
+                  f" {' '.join(map_chars)}"
         agent.connection.write_utf(msg=content)
 
     def do_turn(self, agent: Agent):
@@ -70,7 +74,7 @@ class Game:
             self.send_turn_info(agent)
             turn_action_request = agent.connection.read_data()
             action = Actions(turn_action_request)
-        except Exception as e :
+        except Exception as e:
             print(bcolors.WARNING + f"not valid action " + bcolors.reset)
             action = Actions.NOOP
         self.do_action(action=action, agent=agent)
@@ -119,7 +123,7 @@ class Game:
                 return
 
         if target.is_wall():
-            raise  Exceptions.CantMoveInWall(agent_id=agent.id,tile_address=target.address)
+            raise Exceptions.CantMoveInWall(agent_id=agent.id, tile_address=target.address)
 
         agent.tile = target
         gem = target.get_gem()
