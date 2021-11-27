@@ -1,4 +1,5 @@
 .idea
+validations
 venv
 server/game_logs/*.json
 __init__.py
