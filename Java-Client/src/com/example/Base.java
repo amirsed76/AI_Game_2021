@@ -107,9 +107,10 @@ public abstract class Base {
     }
 
     public enum Action {
-        Up("TOP"), Down("DOWN"), Left("LEFT"), Right("RIGHT"), NoOp("NOOP"), Teleport("TELEPORT"), Trap("TRAP");
+        Up("UP"), Down("DOWN"), Left("LEFT"), Right("RIGHT"), NoOp("NOOP"), Teleport("TELEPORT"), Trap("TRAP");
 
         private final String command;
+
         Action(String command) {
             this.command = command;
         }
@@ -123,9 +124,9 @@ public abstract class Base {
         for (int i = 0; i < this.agentCount; i++, count++) {
             agentScores[i] = Integer.parseInt(dataArray[count]);
         }
-        this.grid = new String[gridWidth][gridHeight];
-        for (int i = 0; i < gridWidth; i++) {
-            for (int j = 0; j < gridHeight; j++, count++) {
+        this.grid = new String[gridHeight][gridWidth];
+        for (int i = 0; i < gridHeight; i++) {
+            for (int j = 0; j < gridWidth; j++, count++) {
                 this.grid[i][j] = dataArray[count];
             }
         }
@@ -137,6 +138,9 @@ public abstract class Base {
         connect();
         while (true) {
             var data = this.bufferedReader.readLine();
+            while (this.bufferedReader.ready()) {
+                data = this.bufferedReader.readLine();
+            }
             if (data.contains("finish!")) {
                 return;
             }
