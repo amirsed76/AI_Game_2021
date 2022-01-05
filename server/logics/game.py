@@ -67,9 +67,8 @@ class Game:
         content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])}" \
                   f" {' '.join([' '.join([str(item) for item in player.get_gems_count().values()]) for player in self.agents])}" \
                   f" {' '.join(map_chars)}"
-        #
-        # content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])}" \
-        #           f" {' '.join(map_chars)}"
+
+
 
         agent.connection.write_utf(msg=content)
 
