@@ -67,6 +67,10 @@ class Game:
         content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])}" \
                   f" {' '.join([' '.join([str(item) for item in player.get_gems_count().values()]) for player in self.agents])}" \
                   f" {' '.join(map_chars)}"
+        #
+        # content = f" {self.turn_number} {agent.trap_count} {' '.join([str(player.score) for player in self.agents])}" \
+        #           f" {' '.join(map_chars)}"
+
         agent.connection.write_utf(msg=content)
 
     def do_turn(self, agent: Agent):
@@ -282,10 +286,11 @@ class Game:
             else:
                 return [agent1, agent2]
 
-    def run(self):
-        for agent in self.agents:
-            self.do_turn_init(agent=agent)
-            agent.connection.set_time_out(self.time_out)
+    def run(self, first_round=True, last_round=True):
+        if first_round:
+            for agent in self.agents:
+                self.do_turn_init(agent=agent)
+                agent.connection.set_time_out(self.time_out)
 
         report = ""
         for turn_number in range(1, self.max_turn_count + 1):
@@ -317,7 +322,9 @@ class Game:
             winner = None
             for agent in self.agents:
                 try:
-                    agent.connection.write_utf(msg=f"finish!")
+                    if last_round:
+
+                        agent.connection.write_utf(msg=f"finish!")
                     self.turn_log(agent_id=None, finish=True, winner_id=None,
                                   report=f"finish!")
                 except:
@@ -327,7 +334,8 @@ class Game:
             winner = winners[0]
             for agent in self.agents:
                 try:
-                    agent.connection.write_utf(msg=f"finish! winner = agent {winner.id}")
+                    if last_round:
+                        agent.connection.write_utf(msg=f"finish! winner = agent {winner.id}")
                     self.turn_log(agent_id=None, finish=True, winner_id=winner.id,
                                   report=f"finish! winner = agent {winner.id}")
                 except:
@@ -336,12 +344,14 @@ class Game:
             winner = None
             for agent in self.agents:
                 try:
-                    agent.connection.write_utf(msg=f"finish! Draw the game")
+                    if last_round:
+                        agent.connection.write_utf(msg=f"finish! Draw the game")
                 except:
                     pass
+
             self.turn_log(agent_id=None, finish=True, winner_id=None, report=f"finish! The game ended in a draw")
 
         now_time = datetime.now()
-        with open(f"game_logs/{now_time.month}_{now_time.day}_{now_time.hour}_{now_time.minute}_{now_time.second}.json",
+        with open(f"game_logs/{now_time.month}_{now_time.day}_{now_time.hour}_{now_time.minute}_{now_time.second}_{now_time.microsecond}.json",
                   "w") as file:
             json.dump(self.turn_logs, file)

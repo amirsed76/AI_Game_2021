@@ -1,0 +1,41 @@
+map 2_1:
+init score: 10
+trun count: 93
+------------------------
+map 2_2:
+init score: 10
+trun count: 90
+------------------------
+map 2_3:
+init score: 0
+trun count: 27
+------------------------
+map 2_4:
+init score: 0
+trun count: 40
+------------------------
+map 2_5:
+init score: 0
+trun count: 30
+------------------------
+map 2_6:
+init score: 10
+trun count: 85
+------------------------
+map 2_7:
+init score: 0
+trun count: 37
+------------------------
+map 2_8:
+init score: 10
+trun count: 68
+------------------------
+map 2_9:
+init score: 15
+trun count: 45
+------------------------
+map 2_10:
+init score: 0
+trun count: 25
+------------------------
+

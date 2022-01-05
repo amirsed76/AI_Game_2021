@@ -71,8 +71,12 @@ def main():
         except Exception as e:
             print(bcolors.WARNING, e, bcolors.reset)
 
-    game = Game.create_game(config=config, player_connections=player_connections, game_map=game_map)
-    game.run()
+    for i in range(0, config["round_repeat"]):
+        game = Game.create_game(config=config, player_connections=player_connections, game_map=game_map)
+        first_round = i == 0
+        last_round = i == config["round_repeat"] - 1
+        game.run(first_round=first_round, last_round=last_round)
+        print(f"finish round {i + 1}")
 
 
 if __name__ == '__main__':

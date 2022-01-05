@@ -1,0 +1,350 @@
+TURN 1 
+EA  1   1   1   E   
+1   2   2   2   1   
+2   3   3   3   2   
+1   2   2   2   1   
+E   1   1   1   EB  
+----------
+TURN 1 
+E   1   1   1   E   
+EA  2   2   2   1   
+2   3   3   3   2   
+1   2   2   2   1   
+E   1   1   1   EB  
+----------
+TURN 2 
+E   1   1   1   E   
+EA  2   2   2   1   
+2   3   3   3   2   
+1   2   2   2   EB  
+E   1   1   1   E   
+----------
+TURN 2 
+EA  1   1   1   E   
+E   2   2   2   1   
+2   3   3   3   2   
+1   2   2   2   EB  
+E   1   1   1   E   
+----------
+TURN 3 
+EA  1   1   1   E   
+E   2   2   2   1   
+2   3   3   3   2B  
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 3 
+E   EA  1   1   E   
+E   2   2   2   1   
+2   3   3   3   2B  
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 4 
+E   EA  1   1   E   
+E   2   2   2   EB  
+2   3   3   3   2   
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 4 
+E   E   1   1   E   
+E   EA  2   2   EB  
+2   3   3   3   2   
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 5 
+E   E   1   1   EB  
+E   EA  2   2   E   
+2   3   3   3   2   
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 5 
+E   E   1   1   EB  
+E   E   2   2   E   
+2   3A  3   3   2   
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 6 
+E   E   1   EB  E   
+E   E   2   2   E   
+2   3A  3   3   2   
+1   2   2   2   E   
+E   1   1   1   E   
+----------
+TURN 6 
+E   E   1   EB  E   
+E   E   2   2   E   
+2   3   3   3   2   
+1   EA  2   2   E   
+E   1   1   1   E   
+----------
+TURN 7 
+E   E   1   E   E   
+E   E   2   EB  E   
+2   3   3   3   2   
+1   EA  2   2   E   
+E   1   1   1   E   
+----------
+TURN 7 
+E   E   1   E   E   
+E   E   2   EB  E   
+2   EA  3   3   2   
+1   E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 8 
+E   E   1   E   E   
+E   E   EB  E   E   
+2   EA  3   3   2   
+1   E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 8 
+E   E   1   E   E   
+E   E   EB  E   E   
+EA  E   3   3   2   
+1   E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 9 
+E   E   1   E   E   
+E   E   E   E   E   
+EA  E   EB  3   2   
+1   E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 9 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   EB  3   2   
+EA  E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 10 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   EB  2   
+EA  E   2   2   E   
+E   1   1   1   E   
+----------
+TURN 10 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   EB  2   
+E   EA  2   2   E   
+E   1   1   1   E   
+----------
+TURN 11 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   EB  
+E   EA  2   2   E   
+E   1   1   1   E   
+----------
+TURN 11 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   EB  
+E   E   EA  2   E   
+E   1   1   1   E   
+----------
+TURN 12 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   EA  2   EB  
+E   1   1   1   E   
+----------
+TURN 12 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   2   EB  
+E   1   EA  1   E   
+----------
+TURN 13 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   EB  E   
+E   1   EA  1   E   
+----------
+TURN 13 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   EB  E   
+E   EA  E   1   E   
+----------
+TURN 14 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   EA  E   EB  E   
+----------
+TURN 14 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   EA  E   E   E   
+E   E   E   EB  E   
+----------
+TURN 15 
+E   E   1   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   EA  E   EB  E   
+E   E   E   E   E   
+----------
+TURN 15 
+E   E   1   E   E   
+E   E   E   E   E   
+E   EA  E   E   E   
+E   E   E   EB  E   
+E   E   E   E   E   
+----------
+TURN 16 
+E   E   1   E   E   
+E   E   E   E   E   
+E   EA  E   EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 16 
+E   E   1   E   E   
+E   EA  E   E   E   
+E   E   E   EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 17 
+E   E   1   E   E   
+E   EA  E   EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 17 
+E   EA  1   E   E   
+E   E   E   EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 18 
+E   EA  1   EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 18 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 19 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 19 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 20 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 20 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 21 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 21 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 22 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 22 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 23 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 23 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 24 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 24 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 25 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
+TURN 25 
+E   E   EA  EB  E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+E   E   E   E   E   
+----------
