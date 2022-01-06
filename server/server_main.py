@@ -72,6 +72,8 @@ def main():
             print(bcolors.WARNING, e, bcolors.reset)
 
     for i in range(0, config["round_repeat"]):
+        game_map = get_map(map_path=map_path)
+
         game = Game.create_game(config=config, player_connections=player_connections, game_map=game_map)
         first_round = i == 0
         last_round = i == config["round_repeat"] - 1
