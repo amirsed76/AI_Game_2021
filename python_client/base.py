@@ -35,7 +35,7 @@ class Action(enum.Enum):
 class BaseAgent(metaclass=abc.ABCMeta):
 
     def __init__(self):
-        config_path = "../../../clients/raufian/AI_Game_2021/python_client/client_config.json"
+        config_path = "client_config.json"
         self.config = get_config(config_path=config_path)
         self.connection = self.connect()
         data = read_utf(self.connection)
